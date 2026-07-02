@@ -24,7 +24,9 @@ async def handle(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(f"已记录入款：{text[1:]}")
     else:
         await update.message.reply_text("暂未识别该命令。")
-        def main():
+
+
+def main():
     init_db()
 
     app = Application.builder().token(BOT_TOKEN).build()
