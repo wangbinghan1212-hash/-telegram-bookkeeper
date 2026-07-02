@@ -1,13 +1,7 @@
 import os
 
-# Telegram Bot Token
-BOT_TOKEN = os.getenv("BOT_TOKEN")
-
-# 默认汇率
-DEFAULT_RATE = 6.8
-
-# 默认费率（%）
-DEFAULT_FEE = 0
-
-# 数据库
+BOT_TOKEN = os.getenv("BOT_TOKEN", "")
 DATABASE = "bookkeeper.db"
+
+DEFAULT_RATE = 0
+DEFAULT_EXCHANGE = 6.8
