@@ -1,14 +1,25 @@
-import json
-import os
+import sqlite3
+from config import DATABASE
 
-DB_FILE = "data.json"
+def connect():
+    return sqlite3.connect(DATABASE)
 
-def load_data():
-    if not os.path.exists(DB_FILE):
-        return {}
-    with open(DB_FILE, "r", encoding="utf-8") as f:
-        return json.load(f)
+def init_db():
+    conn = connect()
+    cur = conn.cursor()
 
-def save_data(data):
-    with open(DB_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS records (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        chat_id INTEGER,
+        user_name TEXT,
+        amount REAL,
+        rate REAL,
+        exchange REAL,
+        type TEXT,
+        created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+    """)
+
+    conn.commit()
+    conn.close()
